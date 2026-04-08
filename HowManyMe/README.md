@@ -11,7 +11,7 @@ The script processes your text through a multi-stage pipeline:
 ## the easy one :
 Ofc There is less Heavy and complicated ones but this helped me learn more stuff lol
 like this :
-cat words.txt | tr -s ' ' '\n' |  sort | uniq -c | sort -nru | awk '{print $2, $1}'
+`cat words.txt | tr -s ' ' '\n' |  sort | uniq -c | sort -nru | awk '{print $2, $1}'`
   
 ## 🛠 Installation
 Make the script executable on your system:
