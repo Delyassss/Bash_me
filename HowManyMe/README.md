@@ -29,25 +29,17 @@ Ofc There is less Heavy and complicated ones but this helped me learn more stuff
 
 The script uses a "pipeline" to move data from your file to your screen. Here is what each part does:
 
-1. **`cat words.txt`**  
-   Reads your file and starts the flow of text.
-   
-2. **`tr ' ' '\n'`**  
-   The **Flattener**. It turns a horizontal line of text into a vertical column of words.
 
-3. **`tee data.txt`**  
-   The **Splitter**. It saves a copy of the list to `data.txt` so the script can use it as a reference for counting.
-
-4. **`xargs -I {}`**  
-   The **Looper**. It grabs each word one-by-one and performs the next two steps on it.
-
-5. **`echo -n "{} "`**  
-   The **Label**. It prints the word on your screen but stays on the same line for the count.
-
-6. **`grep -c "^{}$" data.txt`**  
-   The **Counter**. It looks into the `data.txt` file and counts exactly how many times that specific word appears.
-
-7. **`rm data.txt`**  
-   The **Cleanup**. It deletes the temporary reference file once the work is done.
+| Part | Role | Simple Explanation |
+| :--- | :--- | :--- |
+| **`cat words.txt`** | The Source | Reads your file and starts the stream of data. |
+| **`tr ' ' '\n'`** | The Flattener | Swaps spaces for newlines so every word gets its own line. |
+| **`tee data.txt`** | The Mirror | Saves a copy to `data.txt` so we have a "master list" to search against. |
+| **`xargs -I {}`** | The Looper | Grabs one word at a time and places it into the `{}` placeholder. |
+| **`sh -c '...'`** | **The Manager** | **Crucial:** Allows `xargs` to run multiple commands (`echo` + `grep`) as one single task. |
+| **`echo -n "{} "`** | The Label | Prints the word. The `-n` keeps the count on the same line. |
+| **`grep -c`** | The Counter | Scans `data.txt` and returns the total number of matches. |
+| **`"^{}$"`** | The Lock | `^` (start) and `$` (end) ensure we match the **exact** word only. |
+| **`rm data.txt`** | The Cleanup | Deletes the temporary reference file once the job is finished. |
 
 ---
