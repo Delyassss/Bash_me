@@ -14,15 +14,13 @@ Make the script executable on your system:
 ```bash
 chmod +x HowManyMe.sh
 
-
-
-
 ## ⚙️ The Pipeline Explained
 Here is a "part-by-part" breakdown of the core command:
 
 `cat words.txt | tr ' ' '\n' | tee data.txt | xargs -I {} sh -c 'echo -n "{} "; grep -c "^{}$" data.txt'`
 
-Ofc There is less Heavy and complicated ones but this helped me learn more stuff lol 
+Ofc There is less Heavy and complicated ones but this helped me learn more stuff lol
+like this cat words.txt | tr ' ' '\n' | uniq -c | awk '{print $2, $1}' | sort
 ---
 
 ## 🛠️ The Logic (Step-by-Step)
