@@ -8,7 +8,12 @@ The script processes your text through a multi-stage pipeline:
 2. **Mirroring**: It uses `tee` to create a temporary reference file.
 3. **Counting**: It loops through each word and queries the reference file for the total count.
 4. **Cleanup**: It automatically removes the temporary data file.
-
+##
+  Ofc There is less Heavy and complicated ones but this helped me learn more stuff lol
+like this
+cat words.txt | tr -s ' ' '\n' |  sort | uniq -c | sort -nru | awk '{print $2, $1}'
+---
+  
 ## 🛠 Installation
 Make the script executable on your system:
 ```bash
@@ -18,10 +23,6 @@ chmod +x HowManyMe.sh
 Here is a "part-by-part" breakdown of the core command:
 
 `cat words.txt | tr ' ' '\n' | tee data.txt | xargs -I {} sh -c 'echo -n "{} "; grep -c "^{}$" data.txt'`
-
-Ofc There is less Heavy and complicated ones but this helped me learn more stuff lol
-like this cat words.txt | tr ' ' '\n' | uniq -c | awk '{print $2, $1}' | sort
----
 
 ## 🛠️ The Logic (Step-by-Step)
 
